@@ -1,5 +1,3 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-prototype-builtins */
 import { type ClassValue, clsx } from "clsx";
 import qs from "qs";
 import { twMerge } from "tailwind-merge";
@@ -85,13 +83,17 @@ export function removeKeysFromQuery({
 }
 
 // DEBOUNCE
-export const debounce = (func: (...args: any[]) => void, delay: number) => {
-  let timeoutId: NodeJS.Timeout | null;
-  return (...args: any[]) => {
+export const debounce = <T extends (...args: any[]) => void>(
+  func: T,
+  delay: number
+): ((...args: Parameters<T>) => void) => {
+  let timeoutId: NodeJS.Timeout | null = null;
+  return (...args: Parameters<T>) => {
     if (timeoutId) clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(null, args), delay);
+    timeoutId = setTimeout(() => func(...args), delay);
   };
 };
+
 
 // GE IMAGE SIZE
 export type AspectRatioKey = keyof typeof aspectRatioOptions;
@@ -131,27 +133,27 @@ export const download = (url: string, filename: string) => {
 };
 
 // DEEP MERGE OBJECTS
-export const deepMergeObjects = (obj1: any, obj2: any) => {
-  if(obj2 === null || obj2 === undefined) {
-    return obj1;
-  }
-
-  let output = { ...obj2 };
-
-  for (let key in obj1) {
-    if (obj1.hasOwnProperty(key)) {
+export const deepMergeObjects = <T extends Record<string, any>, U extends Record<string, any>>(
+  obj1: T,
+  obj2: U | null | undefined
+): T & U => {
+  if (obj2 == null) return obj1 as T & U;
+  const output = { ...obj2 } as any;
+  for (const key in obj1) {
+    if (Object.prototype.hasOwnProperty.call(obj1, key)) {
+      const val1 = obj1[key];
+      const val2 = (obj2 as any)[key];
       if (
-        obj1[key] &&
-        typeof obj1[key] === "object" &&
-        obj2[key] &&
-        typeof obj2[key] === "object"
+        val1 &&
+        typeof val1 === "object" &&
+        val2 &&
+        typeof val2 === "object"
       ) {
-        output[key] = deepMergeObjects(obj1[key], obj2[key]);
+        output[key] = deepMergeObjects(val1, val2);
       } else {
-        output[key] = obj1[key];
+        output[key] = val1;
       }
     }
   }
-
   return output;
 };

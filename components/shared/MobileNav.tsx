@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 
 const MobileNav = () => {
     const pathname = usePathname()
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, _setCollapsed] = useState(false);// hedi te3  _  : me3netha tejehel setCollapsed
 
   return (
     <header className="header">
