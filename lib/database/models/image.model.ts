@@ -46,7 +46,7 @@ const ImageSchema = new Schema({
   aspectRatio:       { type: String },                      // نسبة العرض/الارتفاع
   color:             { type: String },                      // اللون المسيطر
   prompt:            { type: String },                      // الوصف/الأمر المستخدم
-  author:            { type: Schema.Types.ObjectId, ref: 'User' }, // مرجع إلى مستخدم في جدول Users
+  author:            { type: Schema.Types.ObjectId, ref: "User"}, // مرجع إلى مستخدم في جدول Users
   createdAt:         { type: Date, default: Date.now },     // تاريخ الإنشاء الافتراضي
   updatedAt:         { type: Date, default: Date.now }      // تاريخ التحديث الافتراضي
 });
