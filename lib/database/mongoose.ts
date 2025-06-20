@@ -27,7 +27,7 @@ if (!MONGODB_URL) {
 
 // إذا لم يكن هناك اتصال قيد الانتظار، نقوم بإنشاء اتصال جديد
  
-cached.promise = cached.promise || mongoose.connect(MONGODB_URL, {dbName: 'imagine_saas',bufferCommands:false})
+cached.promise = cached.promise || mongoose.connect(MONGODB_URL, {dbName: 'newdatabase',bufferCommands:false})
     cached.conn = await cached.promise;
     return cached.conn;
 }
