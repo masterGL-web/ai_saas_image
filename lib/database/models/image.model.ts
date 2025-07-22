@@ -10,7 +10,7 @@ export interface IImage extends Document {
   title: string;               // عنوان الصورة (إلزامي)
   transformationType: string;  // نوع التحويل أو التعديل (إلزامي)
   publicId: string;            // المعرف العام (مثلاً من خدمة Cloudinary) (إلزامي)
-  secureUrl: string;           // رابط آمن للوصول إلى الصورة (إلزامي)
+  secureURL: string;           // رابط آمن للوصول إلى الصورة (إلزامي)
   width?: number;              // عرض الصورة بالبكسل (اختياري)
   height?: number;             // ارتفاع الصورة بالبكسل (اختياري)
   config?: object;             // إعدادات إضافية للتحويل (اختياري)
@@ -38,11 +38,11 @@ const ImageSchema = new Schema({
   title:             { type: String, required: true },      // عنوان الصورة (إلزامي)
   transformationType:{ type: String, required: true },      // نوع التحويل (إلزامي)
   publicId:          { type: String, required: true },      // المعرف العام (إلزامي)
-  secureUrl:         { type: URL,    required: true },      // رابط آمن (إلزامي)
+  secureURL:         { type: String,    required: true },      // رابط آمن (إلزامي)
   width:             { type: Number },                      // عرض الصورة
   height:            { type: Number },                      // ارتفاع الصورة
   config:            { type: Object },                      // إعدادات التحويل الإضافية
-  transformationUrl: { type: URL },                         // رابط الصورة بعد التحويل
+  transformationUrl: { type: String },                         // رابط الصورة بعد التحويل
   aspectRatio:       { type: String },                      // نسبة العرض/الارتفاع
   color:             { type: String },                      // اللون المسيطر
   prompt:            { type: String },                      // الوصف/الأمر المستخدم
