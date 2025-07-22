@@ -3,11 +3,14 @@ import { navLinks } from "@/constants";
 import { getAllImages } from "@/lib/actions/image.actions";
 import Image from "next/image";
 import Link from "next/link";
-import { SearchParamProps } from "@/types"; // تأكد أن هذا المسار صحيح
 
-export default async function Page({ searchParams }: SearchParamProps) {
-  const page = Number(searchParams.page) || 1;
-  const searchQuery = (searchParams.query as string) || "";
+type Props = {
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+export default async function Page({ searchParams }: Props) {
+  const page = Number(searchParams?.page) || 1;
+  const searchQuery = (searchParams?.query as string) || "";
   const images = await getAllImages({ page, searchQuery });
 
   return (
