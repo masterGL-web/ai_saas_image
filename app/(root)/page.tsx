@@ -1,13 +1,15 @@
-import { Collection } from "@/components/shared/Collection"
-import { navLinks } from "@/constants"
-import { getAllImages } from "@/lib/actions/image.actions"
-import Image from "next/image"
-import Link from "next/link"
+import { Collection } from "@/components/shared/Collection";
+import { navLinks } from "@/constants";
+import { getAllImages } from "@/lib/actions/image.actions";
+import Image from "next/image";
+import Link from "next/link";
+import { SearchParamProps } from "@/types"; // تأكد أن هذا المسار صحيح
 
-const Home = async({searchParams}:SearchParamProps) => {
-  const page = Number(searchParams.page) || 1; 
+export default async function Page({ searchParams }: SearchParamProps) {
+  const page = Number(searchParams.page) || 1;
   const searchQuery = (searchParams.query as string) || "";
   const images = await getAllImages({ page, searchQuery });
+
   return (
     <>
       <section className="home">
@@ -31,16 +33,13 @@ const Home = async({searchParams}:SearchParamProps) => {
       </section>
 
       <section className="sm:mt-12">
-      <Collection 
-      hasSearch = {true}
-      images={images?.data}
-      totalPages={images?.totalPage}
-      page={page}
-
-      />
+        <Collection
+          hasSearch={true}
+          images={images?.data}
+          totalPages={images?.totalPage}
+          page={page}
+        />
       </section>
     </>
-  )
+  );
 }
-
-export default Home
