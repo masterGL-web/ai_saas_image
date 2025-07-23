@@ -51,17 +51,16 @@ const Checkout = ({
   };
 
   return (
-    <form action={onCheckout} method="POST">
-      <section>
-        <Button
-          type="submit"
-          role="link"
-          className="w-full rounded-full bg-purple-gradient bg-cover"
-        >
-          Buy Credit
-        </Button>
-      </section>
-    </form>
+    <section>
+      <Button
+        type="button"
+        role="link"
+        className="w-full rounded-full bg-purple-gradient bg-cover"
+        onClick={onCheckout}
+      >
+        Buy Credit
+      </Button>
+    </section>
   );
 };
 
